@@ -1,0 +1,77 @@
+Config {
+  font = "xft:Mononoki Nerd Font:pixelsize=14:antialias=true:hinting=true",
+--  font = "xft:Ubuntu Mono:pixelsize=14:antialias=true:hinting=true",
+  additionalFonts = [],
+  borderColor = "black",
+  border = BottomB,
+  bgColor = "black",
+  fgColor = "grey",
+  alpha = 150,
+  position = Top,
+  textOffset = -1,
+  iconOffset = -1
+  lowerOnStart = True,
+  pickBroadest = False,
+  persistent = False,
+  hideOnStart = False,
+  iconRoot = "/home/vashanka/.xmonad/resources",
+  allDesktops = True,
+  overrideRedirect = True,
+  commands = [
+    Run Weather "UMMS"
+      [
+        "-t", "<fc=#808080><station>:</fc> <tempC><fc=#808080>°C</fc>",
+        "-L", "18", "--low",  "lightblue",
+        "-H", "25", "--high", "red",
+        "--normal", "green"
+      ] 36000,
+
+    Run Network "eth0"
+      [
+        "-t", "<fc=#808080><dev> \xf0aa</fc> <rx><fc=#808080>kb \xf0ab</fc> <tx><fc=#808080>kb</fc>",
+        "-L", "0",  "--low",  "#808080",
+        "-H", "32", "--high", "red",
+        "--normal", "#a9a9a9"
+      ] 10,
+
+    Run Cpu
+      [
+        "-t", "<fc=#808080>\xf108</fc>  <total><fc=#808080>%</fc>",
+        "-L", "30", "--low",  "#808080",
+        "-H", "80", "--high", "red",
+        "--normal", "#a9a9a9"
+      ] 10,
+
+    Run Memory
+      [
+        "-t", "<fc=#808080>\xf233</fc>  <usedratio><fc=#808080>%</fc> <available><fc=#808080>M free</fc>"
+      ] 10,
+
+    Run Swap
+      [
+        "-t", "<fc=#808080>\xe007</fc> <usedratio><fc=#808080>%</fc>"
+      ] 10,
+
+    Run DiskU
+      [
+        ("/", "<fc=#808080>\xf0c7</fc>  <usedp><fc=#808080>%</fc> <free> <fc=#808080>free</fc>")
+      ] [] 20,
+
+    Run Com "uname"
+      [
+        "-s", "-r"
+      ] "" 36000,
+
+    Run Kbd
+      [
+        ("us", "<fc=#a9a9a9>US</fc>"),
+        ("ru", "<fc=yellow>RU</fc>")
+      ],
+
+    Run Date "%b %_d, %a · %H:%M" "date" 10
+  ],
+  sepChar = "%",
+  alignSep = "}{",
+  template = " %cpu%  <fc=#606060>•</fc>  %memory%  <fc=#606060>•</fc>  %swap%  <fc=#606060>•</fc>  %eth0%  <fc=#606060>•</fc>  %disku% }\
+           \{ <fc=#808080>%uname%</fc>  <fc=#606060>•</fc>  %UMMS%  <fc=#606060>•</fc>  %kbd%  <fc=#606060>•</fc>  <fc=#a9a9a9>%date%</fc> "
+}
